@@ -53,20 +53,59 @@ const findMaxHeight = (bst) =>{
   return 1 + findMaxHeight(bst.right);  
 };
 
+const isBst = (bst) => {
+//check if value at left is less than key
+// check that value at right is greater than key
+//input is a bst (or just bt)
+// output true or false
+// start at the root- go down to left & right
+// recursively check if there is a left or right
+// if left is greater than key, return false
+// if right is less than key return false
+// do for each node - if the node matches requirments based
+// on its parent, then do the whole thing again on that node;
 
+  if (!bst.left && !bst.right){
+    return true;
+  }
+
+
+  if (bst.left){
+    if (bst.left.key < bst.key){
+      return isBst(bst.left);
+    } else {
+      return false;
+    }
+  }
+  if (bst.right){
+    if (bst.right.key > bst.key){
+      return isBst(bst.right);
+    }
+    else {
+      return false;
+    }
+  }  
+};
 
 const main = () => {
   bst.insert(20);
   bst.insert(10);
   bst.insert(30);
   bst.insert(5);
-  // bst.insert(15);
-  // bst.insert(17);
-  // bst.insert(18);
-  // bst.insert(19);
+  bst.insert(15);
+  bst.insert(17);
+  bst.insert(18);
+  bst.insert(19);
   bst.insert(25);
+  // bst.left = {
+  //   key : 40,
+  //   left : null,
+  //   right : null,
+  //   value : null
+  // };
   console.log(bst);
-  console.log(bstHeight(bst));
+  // console.log(bstHeight(bst));
+  console.log(isBst(bst));
 
 };
 
