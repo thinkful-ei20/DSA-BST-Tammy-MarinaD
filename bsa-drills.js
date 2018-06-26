@@ -33,28 +33,38 @@ const bstHeight = (bst) => {
 };
 
 const findMinHeight = (bst) =>{
-  if (!bst.left){
+  if (!bst.left && !bst.right){
     return 1;
+  }
+  else if (bst.right){
+    return 1 + findMaxHeight(bst.right);
+    
   }
   return 1 + findMinHeight(bst.left);  
 };
 
 const findMaxHeight = (bst) =>{
-  if (!bst.right){
+  if (!bst.right && !bst.right){
     return 1;
+  }
+  else if (bst.left){
+    return 1 + findMinHeight(bst.left);
   }
   return 1 + findMaxHeight(bst.right);  
 };
 
+
+
 const main = () => {
-  bst.insert(6);
-  bst.insert(4);
-  bst.insert(7);
-  bst.insert(8);
-  bst.insert(2);
-  bst.insert(9);
-  bst.insert(3);
+  bst.insert(20);
   bst.insert(10);
+  bst.insert(30);
+  bst.insert(5);
+  // bst.insert(15);
+  // bst.insert(17);
+  // bst.insert(18);
+  // bst.insert(19);
+  bst.insert(25);
   console.log(bst);
   console.log(bstHeight(bst));
 
