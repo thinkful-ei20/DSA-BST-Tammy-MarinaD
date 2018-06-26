@@ -53,6 +53,16 @@ const findMaxHeight = (bst) =>{
   return 1 + findMaxHeight(bst.right);  
 };
 
+function findHeight(tree) {
+  if(!tree) {
+    return 0;
+  }
+  const leftHeight = findHeight(tree.left);
+  const rightHeight = findHeight(tree.right);
+
+  return Math.max(leftHeight, rightHeight) + 1;
+}
+
 const isBst = (bst) => {
 //check if value at left is less than key
 // check that value at right is greater than key
@@ -87,27 +97,62 @@ const isBst = (bst) => {
   }  
 };
 
+const printTree = (tree) => {
+  if (tree.right) printTree(tree.right);
+
+  console.log(tree.key);
+  
+  if (tree.left) printTree(tree.left);
+};
+
+const thirdLargest = (tree) => {
+  
+  let counter = 0;
+  let result;
+
+  const recursive = (tree) => {
+    if (tree.right) recursive(tree.right);
+    counter++;
+    if (counter === 3) {
+      result = tree.key;
+    }
+    if (counter >= 3){
+      return;
+    }
+    if (tree.left) recursive(tree.left);
+  };
+  
+  recursive(tree);
+  return result;
+};
+
 const main = () => {
-  bst.insert(20);
-  bst.insert(10);
-  bst.insert(30);
+  bst.insert(3);
+  bst.insert(1);
+  bst.insert(4);
+  bst.insert(6);
+  bst.insert(9);
+  bst.insert(2);
   bst.insert(5);
-  bst.insert(15);
-  bst.insert(17);
-  bst.insert(18);
-  bst.insert(19);
-  bst.insert(25);
+  bst.insert(7);
   // bst.left = {
   //   key : 40,
   //   left : null,
   //   right : null,
   //   value : null
   // };
-  console.log(bst);
+  // console.log(bst);
+  // printTree(bst);
+  console.log(thirdLargest(bst));
   // console.log(bstHeight(bst));
-  console.log(isBst(bst));
+  // console.log(findHeight(bst));
+  // console.log(isBst(bst));
 
 };
 
 main();
+
+// if right ->print all to right
+// print self
+// if left -> print all to left
 
